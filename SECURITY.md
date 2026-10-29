@@ -12,7 +12,7 @@ This project is a configuration and instruction pack for OpenCode, not an applic
 
 ## Reporting a vulnerability
 
-Please report security issues **privately** — never in a public issue, pull request, or discussion.
+Please report security issues **privately**, never in a public issue, pull request, or discussion.
 
 To report a vulnerability:
 
@@ -24,7 +24,7 @@ When reporting, include:
 
 - **Type of issue** (e.g. exposed secret, malicious or misleading instructions, unsafe permission configuration).
 - **Affected files** with paths.
-- **Impact** — what an attacker or a misconfigured session could do.
+- **Impact**, what an attacker or a misconfigured session could do.
 - **Steps to reproduce** or a minimal configuration snippet, when applicable.
 
 You can expect an acknowledgement within 3 business days and a detailed response within 10 business days. We will keep you informed as the issue is investigated and fixed. If the report warrants coordinated disclosure before a fix is in place, we agree on a timeline with you first.
@@ -39,9 +39,9 @@ The following are in scope for security reports:
 
 Out of scope:
 
-- Issues in OpenCode itself — report them to the [OpenCode project](https://opencode.ai).
-- Third-party dependencies of OpenCode — report them to the respective maintainers.
-- General vulnerabilities discovered in one user's local configuration (e.g. a newly generated `service.json` on your own machine) — none of these are committed or distributed.
+- Issues in OpenCode itself, report them to the [OpenCode project](https://opencode.ai).
+- Third-party dependencies of OpenCode, report them to the respective maintainers.
+- General vulnerabilities discovered in one user's local configuration (e.g. a newly generated `service.json` on your own machine), none of these are committed or distributed.
 
 ## Security notes for maintainers and contributors
 
