@@ -6,19 +6,19 @@ Senior SWE, not codegen/autocomplete. Shipped prod, paged 3am on bad deploy. Tra
 
 ## This repository
 
-This repository = the **global OpenCode config** (default location: `~/.config/opencode`), not a codebase: no git repo, no build/test/lint. Almost everything auto-loaded into *every* session → edits have global blast radius:
+`~/.config/opencode` = **global OpenCode config**, not codebase: no git repo, no build/test/lint. Almost everything auto-loaded into *every* session → edits have global blast radius:
 
-- `opencode.jsonc` sets `default_agent: web-developer`, injects `rules/*.md` as session instructions.
+- `opencode.jsonc` sets `default_agent: web-developer`, injects `rules/clean-code.md` as the only always-loaded session instruction.
 - This `AGENTS.md` loaded into every session too — changes agent behavior everywhere, not just here.
-- `agents/*.md` (7), `skills/*/SKILL.md` (9), `commands/*.md` (2) register agents, skills, slash commands globally.
-- Skill↔agent map: specialist subagent owns domain skill (`code-reviewer`→`code-review`, `seo-expert`→`seo-audit`, `ux-ui-expert`→`web-design`, `accessibility-expert`→`frontend-accessibility`, `documentation-updater`→`update-documentation`, `security-expert`→`security-audit`); web-developer owns generalists (`systematic-debugging`, `performance-optimizer`, `website-analyzer`); code-reviewer also `performance-optimizer` + `systematic-debugging`.
+- `agents/*.md` (7), `skills/*/SKILL.md` (13), `commands/*.md` (2) register agents, skills, slash commands globally.
+- Skill↔agent map: specialist subagent owns domain skill (`code-reviewer`→`code-review`, `seo-expert`→`seo-audit`, `ux-ui-expert`→`web-design`, `accessibility-expert`→`frontend-accessibility`, `documentation-updater`→`update-documentation`, `security-expert`→`security-audit`); web-developer owns generalists (`systematic-debugging`, `performance-optimizer`, `website-analyzer`) + framework conventions (`astro-expert`, `bulma-expert`, `vue-expert`, `nuxt-expert`); code-reviewer also `performance-optimizer` + `systematic-debugging`.
 
 ## Directory gotchas
 
-- `rules/` (`clean-code.md`, `astro.md`, `bulma.md`) = canonical standards source, only auto-loaded instruction set. `astro-bulma-structure.md` gone; content merged into `astro.md` + `bulma.md`.
+- `rules/` (`clean-code.md`) = canonical standards source, the only always-injected instruction set. `rules/astro.md` + `rules/bulma.md` deleted; content now split into skills `astro-expert` + `bulma-expert` (on-demand, not injected).
 - `original/` = pristine backups (`*.original.md`). Read-only; never edit — live files = non-`.original` siblings.
 - `package.json`/`package-lock.json`/`node_modules`/`original/`/`.gitignore` runtime-managed, gitignored. No hand edits (only plugin deps like `@opencode-ai/plugin`).
-- `service.json` = **plaintext password**, local OpenCode service, gitignored. Never commit, echo, or include in prompts/logs.
+- `service.json` = **plaintext password**, local OpenCode service, **not** gitignored. Never commit, echo, or include in prompts/logs.
 - Skills/agents trigger off `description` frontmatter — keep sharp; vague description = never selected.
 - Agent permission pattern: edits gated `effect: ask`; sandbox via trailing `external_directory: deny` (last matching rule wins).
 
@@ -30,9 +30,11 @@ This repository = the **global OpenCode config** (default location: `~/.config/o
 
 ## Canonical sources
 
-- `rules/clean-code.md` — language-agnostic clean-code baseline. **Mandatory** before non-trivial edits.
-- `rules/astro.md` — Astro structure + component conventions.
-- `rules/bulma.md` — Bulma CSS customization, responsive, layout conventions.
+- `~/.config/opencode/rules/clean-code.md` — language-agnostic clean-code baseline. **Mandatory** before non-trivial edits. Always injected via `instructions`.
+- Skill `astro-expert` — Astro structure + component conventions. Load on demand in Astro projects.
+- Skill `bulma-expert` — Bulma CSS customization, responsive, layout conventions. Load on demand when Bulma is used.
+- Skill `vue-expert` — Vue 3 / Nuxt / Pinia conventions, Composition API, Vite builds. Load on demand in Vue projects.
+- Skill `nuxt-expert` — Nuxt 4/3 SSR/SSG/hybrid conventions, routing, data fetching, Nitro, SEO. Load on demand in Nuxt projects.
 - Project `AGENTS.md` / existing conventions override only when stricter. Else these win.
 
 ## Working in any project
@@ -45,4 +47,4 @@ This repository = the **global OpenCode config** (default location: `~/.config/o
 - Never silently skip requirement — say what can't be done, why; propose alternative.
 - GitHub code examples → `gh_grep` tool. Only when needed.
 - Read project `docs/` folder if present. **Mandatory.**
-- Read `rules/` before non-trivial edits. **Mandatory.**
+- Read `~/.config/opencode/rules` before non-trivial edits. **Mandatory.**

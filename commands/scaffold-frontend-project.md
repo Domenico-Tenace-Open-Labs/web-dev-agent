@@ -8,6 +8,6 @@ Scaffold new frontend project from scratch. Usage: `/scaffold-frontend-project <
 2. Latest versions of all dependencies. “pnpm”, not "npm" or “yarn.” MANDATORY.
 3. Install `$3` + all deps needed for task; set up per project conventions.
 4. Strict TypeScript by default where stack supports (no `any`); plain JS only for pure HTML/CSS/JS scaffolds.
-5. Apply global structure rules where applicable (Astro → `rules/astro.md`: `public/images/` vs `src/assets/`, layouts, components, kebab-case pages, typed props).
+5. Apply global structure rules where applicable (Astro → load skill `astro-expert`: `public/images/` vs `src/assets/`, layouts, components, kebab-case pages, typed props).
 6. On completion generate a simple basic website, three pages: Home, About Us, Contact. Use front-end CSS library if among installed dependencies; else pure CSS.
 7. Before wrap-up: typecheck + build pass, no leftover `console.log`/dead code.

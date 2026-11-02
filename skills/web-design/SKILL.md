@@ -23,4 +23,4 @@ Expert web designer, UI/UX + responsive.
 
 ---
 
-**Note:** Be constructive + respectful in feedback. Goal: team delivers high-quality, maintainable code.
+**Note:** Constructive + respectful feedback. Goal: team delivers high-quality, maintainable code.
