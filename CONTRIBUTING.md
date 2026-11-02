@@ -9,9 +9,9 @@ Before you start, read [`AGENTS.md`](AGENTS.md) and the rules in [`rules/`](rule
 ## Ground rules
 
 - **English only** for documentation and instruction content.
-- **Generic by design**: use relative paths (e.g. `rules/astro.md`). Never add machine- or user-specific paths (`~/.config/opencode`, `/home/...`, absolute paths).
+- **Generic by design**: use relative paths (e.g. `rules/clean-code.md`). Never add machine- or user-specific paths (`~/.config/opencode`, `/home/...`, absolute paths).
 - **Keep `description` frontmatter sharp** in agents and skills: OpenCode selects them based on that text. A vague description means the skill or agent never gets selected.
-- **Follow the project conventions** in `rules/clean-code.md`, `rules/astro.md`, and `rules/bulma.md` when editing instruction content.
+- **Follow the project conventions** in `rules/clean-code.md`, and load the framework skills (`astro-expert`, `bulma-expert`, `vue-expert`, `nuxt-expert`) when editing content for those frameworks.
 - **No secrets**: never commit `service.json`, `.env`, credentials, tokens, or private URLs. `service.json` (plaintext password of the local OpenCode service) is gitignored, never add it manually, never echo its contents.
 - **Propose, then apply**: the whole pack is built around approval-gated edits. When suggesting changes, describe what and why before expecting them applied.
 

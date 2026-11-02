@@ -20,16 +20,16 @@ python3 <skill-path>/scripts/fetch_site.py <url>
 ```
 Script uses stdlib only, prints JSON with: HTTP headers, home page SEO (title, meta description, H1/H2, canonical, hreflang, Open Graph, JSON-LD, images without alt), internal links, robots.txt, sitemap, technology signals, most used colors, CSS variables, fonts. Use `--css-files N` to read more stylesheets (default 6).
 
-If JSON contains `"error"`, network blocked from shell: switch to WebFetch to read pages (see step 3) and mark as "not verifiable" everything needing HTML source (framework versions, CSS classes, loaded scripts). Don't retry with curl or other commands — same filter blocks all.
+If JSON contains `"error"`, network blocked from shell: switch to WebFetch to read pages (see step 3) and mark "not verifiable" everything needing HTML source (framework versions, CSS classes, loaded scripts). Don't retry with curl or other commands — same filter blocks all.
 
 ### 3. Read the pages that matter
 With WebFetch, open home page then 3-4 pages from internal links: about, services/products, contact, blog/pricing. Don't crawl everything. Look for:
-- what site sells/offers, in one sentence
+- what site sells/offers, one sentence
 - tone of voice (formal, technical, ironic, institutional)
 - main CTAs (quote, purchase, signup, booking)
-- whether prices shown, language, geographic market, reviews/case studies
+- prices shown, language, geographic market, reviews/case studies
 
-If page near-empty (`likely_client_rendered: true` in JSON), site is client-rendered: say so — affects SEO too.
+Page near-empty (`likely_client_rendered: true` in JSON) → site client-rendered: say so — affects SEO too.
 
 ### 4. Interpret, don't just list
 Script gives clues, you draw conclusions. Criteria:
@@ -42,7 +42,7 @@ Script gives clues, you draw conclusions. Criteria:
 **Technologies**
 - Separate CMS, framework, CSS library, hosting/CDN, analytics, payments. Source the clue when non-obvious ("`/_next/` in scripts, so Next.js").
 - Tech from single weak clue = "likely". Tailwind shows in utility classes, but minified build hides it.
-- If page builder (Elementor, Divi) or well-known theme present, say so: explains look + perf.
+- Page builder (Elementor, Divi) or well-known theme present → say so: explains look + perf.
 
 **Visual design**
 - Palette: from most frequent CSS colors + variables (`--primary` etc.), identify primary, secondary, accent, neutrals. Report hex values. Ignore colors from bundled libraries (plugins, widgets), not site's own design.
@@ -51,7 +51,7 @@ Script gives clues, you draw conclusions. Criteria:
 
 **Target audience**
 - Derive from content: who pays (B2B/B2C, industry, typical customer size), who uses it, arrival context. Consider vocabulary, prices, CTAs, language, market.
-- One-two sharp sentences beat invented persona list. If signals weak, say so.
+- One-two sharp sentences beat invented persona list. Weak signals → say so.
 
 ### 5. Strengths, weaknesses and fixes
 Only use findings from above. Every point needs evidence, every weakness needs fix.
@@ -142,11 +142,11 @@ Only use findings from above. Every point needs evidence, every weakness needs f
 ## Style rules for the file
 
 - English, short direct sentences, colleague-over-coffee tone, not press release.
-- No em dashes or en dashes: use commas, colons, parentheses.
+- No em/en dashes: use commas, colons, parentheses.
 - No buzzwords or corporate speak ("end-to-end solution", "best-in-class").
 - Weaknesses listed with evidence, always paired with fix. Never problem without fix, never fix without problem.
 - Every claim rests on something seen. What can't be known from outside (traffic, conversions, backend, exact versions) written as "not detectable".
-- If site in another language, report stays English, quoted text left in original.
+- Site in another language → report stays English, quoted text left in original.
 
 ## Wrapping up
 

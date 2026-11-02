@@ -24,7 +24,7 @@ Vague report ("it breaks sometimes"): turn into reproducible case first, don't p
 
 ### 2. Isolate the cause before proposing a fix
 
-Reproduced? Narrow it down:
+Reproduced? Narrow it:
 
 - **Bisection**: suspect recent change? Check git history, find which commit introduced bug.
 - **Targeted logging**: logs/breakpoints at key flow points, not everywhere. Find where state diverges from expected.
@@ -34,7 +34,7 @@ No fix without clear theory of why. "I changed this line and error went away" = 
 
 ### 3. Tell the symptom apart from the cause
 
-Before fixing, ask: fix cause or hide symptom? Classic: `null` crashes downstream. Adding `if (x !== null)` removes crash, but if `x` should never be `null` there, real bug is upstream where `x` is produced.
+Before fixing, ask: fix cause or hide symptom? Classic: `null` crashes downstream. Adding `if (x !== null)` removes crash, but if `x` should never be `null` there, real bug is upstream where `x` produced.
 
 Real cause too risky to fix now? Temporary mitigation OK, but flag clearly (code comment or PR note), don't pass off as final solution.
 
@@ -47,7 +47,7 @@ After fix:
 
 ### 5. Explain what happened
 
-When presenting fix, include:
+Presenting fix, include:
 - Expected vs observed behavior.
 - Actual root cause (not just "I changed X").
 - Why fix addresses cause, not symptom.

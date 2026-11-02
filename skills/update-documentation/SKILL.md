@@ -27,8 +27,8 @@ Prioritize factual accuracy over verbosity. Never document behavior not verifiab
 Inspect and update docs in these areas when relevant:
 
 - `README.md` and localized README files.
-- `CHANGELOG.md`, release notes, and migration guides.
-- Markdown files in `docs/`, `documentation/`, or similar dirs.
+- `CHANGELOG.md`, release notes, migration guides.
+- Markdown in `docs/`, `documentation/`, or similar dirs.
 - API documentation.
 - Code comments and docstrings.
 - CLI help text and command docs.
@@ -40,41 +40,41 @@ Inspect and update docs in these areas when relevant:
 - Contributing guidelines.
 - Examples and sample config files.
 - Docs generated from source annotations.
-- Links, references, badges, and version info.
+- Links, references, badges, version info.
 
-Only modify files affected by requested change or containing demonstrably stale info.
+Only modify files affected by requested change or with demonstrably stale info.
 
 ## Core Principles
 
 1. **Inspect before editing.**
-   Understand repo structure, dev conventions, and existing doc style before changes.
+   Understand repo structure, dev conventions, existing doc style before changes.
 
 2. **Use implementation as source of truth.**
-   Verify documented behavior against actual code, tests, config, scripts, and command definitions.
+   Verify documented behavior vs actual code, tests, config, scripts, command definitions.
 
 3. **Make focused changes.**
-   No unrelated rewrites, formatting churn, or broad restructuring unless requested.
+   No unrelated rewrites, formatting churn, broad restructuring unless requested.
 
 4. **Preserve existing voice and structure.**
-   Follow language, tone, heading hierarchy, terminology, and formatting conventions already used.
+   Follow language, tone, heading hierarchy, terminology, formatting already used.
 
 5. **Document user-visible behavior.**
-   Prefer behavior, inputs, outputs, side effects, errors, config, and examples over impl details.
+   Prefer behavior, inputs, outputs, side effects, errors, config, examples over impl details.
 
 6. **Keep examples executable or realistic.**
-   Examples must use valid commands, current APIs, correct paths, realistic values.
+   Valid commands, current APIs, correct paths, realistic values.
 
 7. **Avoid duplication.**
    Link to canonical source instead of copying.
 
 8. **Do not hide uncertainty.**
-   State uncertainty and ask user instead of inventing details.
+   State uncertainty, ask user instead of inventing details.
 
 9. **Preserve intentional comments.**
    Keep comments explaining non-obvious constraints, compat decisions, security considerations, known trade-offs.
 
 10. **Keep docs maintainable.**
-    Prefer concise, structured docs easy to update as code evolves.
+    Concise, structured, easy to update as code evolves.
 
 ## Required Workflow
 
@@ -83,16 +83,16 @@ Only modify files affected by requested change or containing demonstrably stale 
 Before editing, inspect:
 
 - Repo root.
-- Project type and primary languages.
-- Package or build manifests.
+- Project type + primary languages.
+- Package/build manifests.
 - Existing doc files.
-- Contribution and style guidelines.
-- Git status and recent history, when available.
-- Test and validation commands.
+- Contribution + style guidelines.
+- Git status + recent history, when available.
+- Test + validation commands.
 - CI configuration.
-- Release and versioning conventions.
+- Release + versioning conventions.
 
-Useful files to inspect may include:
+Useful files may include:
 
 - `README.md`
 - `CHANGELOG.md`
@@ -124,11 +124,11 @@ Determine:
 - Which users affected.
 - Which doc files likely affected.
 - Whether change needs changelog entry.
-- Whether migration or upgrade instructions needed.
+- Whether migration/upgrade instructions needed.
 - Whether inline comments or docstrings need updating.
-- Whether examples, screenshots, diagrams, or config references now stale.
+- Whether examples, screenshots, diagrams, config references now stale.
 
-If request ambiguous, inspect code and recent changes before asking.
+If request ambiguous, inspect code + recent changes before asking.
 
 ### 3. Inspect the Relevant Implementation
 
@@ -136,18 +136,18 @@ Trace documented behavior to its implementation.
 
 Inspect:
 
-- Public functions, classes, modules, and endpoints.
-- CLI commands and argument parsing.
-- Config loading and defaults.
+- Public functions, classes, modules, endpoints.
+- CLI commands + argument parsing.
+- Config loading + defaults.
 - Env vars.
-- Error handling and exit codes.
-- Auth and authorization behavior.
-- Serialization and response formats.
+- Error handling + exit codes.
+- Auth + authorization behavior.
+- Serialization + response formats.
 - Feature flags.
 - Database migrations.
-- Build and deployment scripts.
-- Tests and fixtures.
-- Recent commits or diffs related to requested change.
+- Build/deployment scripts.
+- Tests + fixtures.
+- Recent commits/diffs related to requested change.
 
 Use tests as evidence of intended behavior. Don't assume tests cover every use case.
 
@@ -161,13 +161,13 @@ Search for:
 - Incorrect default values.
 - Stale file paths.
 - Broken or obsolete links.
-- Examples that no longer match API.
+- Examples no longer matching API.
 - Config options no longer supported.
 - Missing docs for new public behavior.
 - Comments contradicting implementation.
 - Duplicate or conflicting instructions.
 
-Search globally for relevant identifiers, commands, option names, env vars, URLs, and version strings.
+Search globally for relevant identifiers, commands, option names, env vars, URLs, version strings.
 
 ### 5. Create a Documentation Plan
 
@@ -189,17 +189,17 @@ Apply smallest complete set of changes.
 
 When updating README or guide:
 
-- Keep intro concise and accurate.
+- Keep intro concise + accurate.
 - Verify install commands.
-- Verify prerequisites and supported versions.
-- Verify setup steps and config names.
+- Verify prerequisites + supported versions.
+- Verify setup steps + config names.
 - Verify command examples.
 - Explain expected output where useful.
 - Document common errors if relevant.
 - Keep sections in logical order.
 - Use consistent heading levels.
 - Prefer relative links for repo-local files.
-- Avoid embedding secrets or machine-specific paths.
+- Avoid secrets or machine-specific paths.
 
 #### Changelogs
 
@@ -217,7 +217,7 @@ When no format exists, use clear categories:
 Changelog entries should:
 
 - Describe user-visible impact.
-- Use project's existing tense and style.
+- Use project's existing tense + style.
 - Avoid impl details unless relevant to users.
 - Mention breaking changes explicitly.
 - Include migration guidance when needed.
@@ -227,7 +227,7 @@ Don't rewrite historical entries to improve style unless requested.
 
 #### Comments and Docstrings
 
-Add or update comments only when they improve understanding.
+Add/update comments only when they improve understanding.
 
 Good comments explain:
 
@@ -237,7 +237,7 @@ Good comments explain:
 - Security constraints.
 - Performance trade-offs.
 - Workarounds for external limitations.
-- Preconditions and side effects.
+- Preconditions + side effects.
 - Public API behavior not obvious from signature.
 
 Avoid comments that restate code.
@@ -260,16 +260,16 @@ Keep comments close to code they describe.
 For public APIs, verify and document:
 
 - Endpoint or function purpose.
-- Method and path, when applicable.
+- Method + path, when applicable.
 - Auth requirements.
-- Parameters and types.
-- Required and optional fields.
+- Parameters + types.
+- Required + optional fields.
 - Default values.
 - Return format.
 - Error responses.
-- Pagination, filtering, or sorting behavior.
+- Pagination, filtering, sorting behavior.
 - Rate limits or retries.
-- Compatibility and deprecation status.
+- Compatibility + deprecation status.
 - Minimal valid examples.
 
 Don't document internal impl details as public API guarantees unless project explicitly treats them as stable.
@@ -290,10 +290,10 @@ Manual checks:
 
 - Read every changed section from user perspective.
 - Check heading hierarchy.
-- Check links and anchors.
-- Check code fences and syntax highlighting.
-- Check command names and flags.
-- Check env vars and defaults.
+- Check links + anchors.
+- Check code fences + syntax highlighting.
+- Check command names + flags.
+- Check env vars + defaults.
 - Check version references.
 - Check terminology consistency.
 - Check examples match current interfaces.
@@ -337,7 +337,7 @@ If generated docs involved:
 2. Determine project's generation command.
 3. Update source.
 4. Regenerate output only if repo conventions require committed generated files.
-5. Verify generated changes are limited and expected.
+5. Verify generated changes limited + expected.
 
 ## Changelog Policy
 
@@ -381,7 +381,7 @@ Otherwise, make smallest reasonable assumption, document only verifiable facts, 
 
 ## Suggested Inspection Commands
 
-Use commands appropriate for repo and environment. Examples:
+Use commands appropriate for repo + environment. Examples:
 
 ```bash
 pwd
@@ -403,7 +403,7 @@ After completing work, report:
 2. Files changed.
 3. Assumptions or unresolved questions.
 4. Validation commands run.
-5. Validation not run and reason.
+5. Validation not run + reason.
 6. Follow-up docs still useful.
 
 Use concise format:

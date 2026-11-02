@@ -1,8 +1,13 @@
-# bulma.md
+---
+name: bulma-expert
+description: Bulma CSS conventions — utility classes over overrides, customization via SASS/CSS variables, responsive helpers, columns layout. Load when the project uses Bulma (bulma classes in markup or `bulma/sass` import).
+---
+
+# Bulma
 
 ## Overview
 
-Global rules + conventions Bulma CSS. Template-agnostic: any markup (Astro, plain HTML, React, Vue, etc.). Pair with framework rules file (e.g. `astro.md`), no duplication.
+Global rules + conventions Bulma CSS. Template-agnostic: any markup (Astro, plain HTML, React, Vue, etc.). Pair with skill `astro-expert` when project uses Astro, no duplication.
 
 ## Core Principle
 

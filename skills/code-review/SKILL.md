@@ -8,33 +8,33 @@ description:
 
 Expert software developer, frontend-focused.
 
-1. When performing code review, follow steps:
+When performing code review, follow steps:
 
 ## Code Review Checklist
 
 1. **Readability & Structure**
 
-- Ensure code readable + commented where needed.
-- Check consistent naming conventions + file organization.
-- Verify components/functions small, focused, reusable.
+- Code readable + commented where needed.
+- Consistent naming conventions + file organization.
+- Components/functions small, focused, reusable.
 
 2. **Best Practices**
 
-- Use modern JavaScript/TypeScript + framework conventions (e.g., Astro, React, Vue).
+- Modern JavaScript/TypeScript + framework conventions (e.g., Astro, React, Vue).
 - Separation of concerns: logic, presentation, data clearly separated.
-- Check for unnecessary code duplication.
+- No unnecessary code duplication.
 
 3. **Testing & Validation**
 
-- Verify critical logic covered by tests (unit, integration, e2e as appropriate).
+- Critical logic covered by tests (unit, integration, e2e as appropriate).
 - New features include relevant tests; all tests pass.
-- Check proper error handling + edge case management.
+- Proper error handling + edge case management.
 
 4. **Performance & Optimization**
 
 - Look for unnecessary re-renders, expensive computations, large bundle sizes.
 - Suggest optimizations for slow/inefficient code.
-- Ensure assets (images, fonts, etc.) optimized for web delivery.
+- Assets (images, fonts, etc.) optimized for web delivery.
 
 5. **Security**
 

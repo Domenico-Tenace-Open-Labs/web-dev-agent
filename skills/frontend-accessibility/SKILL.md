@@ -62,28 +62,28 @@ No WCAG conformance claim from code review or automated test alone. Accessibilit
    Use native controls (`button`, `a`, `input`, `select`, `textarea`, `dialog`) + semantic landmarks before adding ARIA.
 
 3. **Use ARIA only when necessary.**
-   ARIA must accurately reflect behavior + state. Do not use ARIA to compensate for incorrect semantics when native HTML suffices.
+   ARIA must accurately reflect behavior + state. No ARIA to compensate for incorrect semantics when native HTML suffices.
 
 4. **Fix behavior, not only markup.**
    Element not accessible merely because it has role, label, or `tabIndex`. Verify interaction, focus, state changes, announcements.
 
 5. **Preserve existing functionality.**
-   Accessibility improvements must not break visual behavior, routing, form submission, responsive layouts, or supported browsers.
+   A11y improvements must not break visual behavior, routing, form submission, responsive layouts, or supported browsers.
 
 6. **Avoid unnecessary changes.**
-   Make focused, reviewable changes. Do not refactor unrelated code during accessibility fix.
+   Focused, reviewable changes. No refactoring unrelated code during a11y fix.
 
 7. **Treat visible focus as required.**
    Never remove focus indicators without equally visible replacement.
 
 8. **Do not rely on color alone.**
-   Convey meaning using text, icons with accessible names, patterns, structure, non-color indicators.
+   Convey meaning via text, icons with accessible names, patterns, structure, non-color indicators.
 
 9. **Test both automated and manually observable behavior.**
    Automated tools catch only subset of problems.
 
 10. **Document limitations honestly.**
-    Record what was checked, what could not be checked, which issues need manual assistive-technology testing.
+    Record what checked, what could not be checked, which issues need manual assistive-technology testing.
 
 ## Required Workflow
 
@@ -93,19 +93,19 @@ Inspect repository before making changes.
 
 Identify:
 
-- Frontend framework and version.
+- Frontend framework + version.
 - Rendering model: client-side, server-side, static, or hybrid.
-- Component library and design system.
+- Component library + design system.
 - Styling approach.
 - Routing solution.
-- Form and validation libraries.
+- Form + validation libraries.
 - State-management approach.
 - Existing accessibility utilities.
-- Test frameworks and scripts.
+- Test frameworks + scripts.
 - End-to-end testing setup.
-- Linting and formatting rules.
+- Linting + formatting rules.
 - Browser support targets.
-- Existing accessibility documentation and policies.
+- Existing accessibility documentation + policies.
 
 Look for:
 
@@ -138,20 +138,20 @@ Translate request into concrete accessibility tasks.
 
 Determine:
 
-- Which pages, components, flows, or user journeys are in scope.
+- Which pages, components, flows, or user journeys in scope.
 - Whether request concerns specific WCAG criterion.
 - Whether goal is analysis only or implementation.
-- Which users or assistive technologies are relevant.
-- Whether visual design changes are allowed.
+- Which users or assistive technologies relevant.
+- Whether visual design changes allowed.
 - Whether new dependencies may be added.
-- Whether accessibility tests are expected.
+- Whether accessibility tests expected.
 - Whether change is bug fix, audit, refactor, or release requirement.
 
 If scope unclear, inspect code and identify smallest useful scope before asking questions.
 
 ### 3. Map the User Interface
 
-Identify key user journeys and interactive surfaces:
+Identify key user journeys + interactive surfaces:
 
 - Application shell.
 - Header and navigation.
@@ -161,19 +161,19 @@ Identify key user journeys and interactive surfaces:
 - Authentication flows.
 - Forms and validation.
 - Dialogs and drawers.
-- Tabs, accordions, carousels, and disclosures.
+- Tabs, accordions, carousels, disclosures.
 - Data tables.
 - Lists and virtualized content.
 - Tooltips and popovers.
 - Toasts and live regions.
-- Loading, empty, and error states.
+- Loading, empty, error states.
 - Drag-and-drop or sortable interfaces.
 - Media players.
 - Infinite scrolling and pagination.
 - Custom controls.
 - Mobile-specific interactions.
 
-Prioritize critical flows + shared components. Defect in shared component may affect entire application.
+Prioritize critical flows + shared components. Defect in shared component may affect entire app.
 
 ### 4. Perform a Static Accessibility Review
 
@@ -187,8 +187,8 @@ Check for:
 - Logical heading hierarchy.
 - One clear primary page heading where appropriate.
 - Semantic landmarks (`header`, `nav`, `main`, `aside`, `footer`).
-- Correct list, table, and section semantics.
-- Appropriate use of buttons versus links.
+- Correct list, table, section semantics.
+- Appropriate buttons versus links.
 - Avoidance of clickable non-interactive elements.
 - Decorative elements hidden from assistive technology.
 - Appropriate language declarations.
@@ -201,15 +201,15 @@ Do not add landmarks or headings solely to satisfy checklist. Must reflect actua
 
 Check that:
 
-- All interactive functionality is available by keyboard.
+- All interactive functionality available by keyboard.
 - Interactive elements reachable in logical order.
-- No keyboard trap exists.
+- No keyboard trap.
 - Custom controls support expected keys.
 - Menus, dialogs, tabs, accordions, carousels implement appropriate keyboard behavior.
 - Focus moves predictably when UI state changes.
 - Focus restored appropriately when overlays close.
-- Disabled or unavailable controls behave consistently.
-- No positive `tabIndex` values used without strong, documented reason.
+- Disabled/unavailable controls behave consistently.
+- No positive `tabIndex` without strong, documented reason.
 - Hover-only functionality has accessible equivalent.
 - Drag-and-drop has keyboard-accessible alternative.
 
@@ -220,8 +220,8 @@ Check for:
 - Visible focus indicator.
 - Sufficient focus contrast against adjacent colors.
 - Focus styles not clipped or hidden.
-- Correct focus placement when opening dialogs or menus.
-- Focus trapping only where appropriate (especially modal dialogs).
+- Correct focus placement when opening dialogs/menus.
+- Focus trapping only where appropriate (esp. modal dialogs).
 - Focus restoration after closing overlays.
 - Focus behavior after route changes.
 - Focus behavior after dynamically inserting content.
@@ -265,12 +265,12 @@ Check that forms provide:
 - Correct label-control associations.
 - Instructions before input when needed.
 - Clearly identified required fields.
-- Correct input types and autocomplete tokens.
-- Useful constraints and input modes.
+- Correct input types + autocomplete tokens.
+- Useful constraints + input modes.
 - Inline validation understandable without relying on color.
 - Programmatic association between errors and fields.
 - Summary for multiple errors when appropriate.
-- Error focus or announcement behavior that does not disorient users.
+- Error focus/announcement behavior that does not disorient users.
 - Preservation of entered values after validation failures.
 - Accessible status for asynchronous validation.
 
@@ -281,7 +281,7 @@ No placeholder text as only label or instruction.
 Check that:
 
 - Informative images have concise, meaningful alternative text.
-- Decorative images use empty alternative text or hidden appropriately.
+- Decorative images use empty alt or hidden appropriately.
 - Functional images describe action, not only visual.
 - Complex images have appropriate long description or nearby explanation.
 - SVGs have accessible name when they convey meaning.
@@ -289,7 +289,7 @@ Check that:
 - Icon-only controls have visible or programmatic context.
 - Images do not contain essential text without accessible equivalent.
 
-No alt text that repeats nearby visible text unnecessarily.
+No alt text repeating nearby visible text unnecessarily.
 
 #### 4.7 Color, Contrast, and Visual Presentation
 
@@ -297,15 +297,15 @@ Check for:
 
 - Text contrast.
 - Non-text contrast for controls, focus indicators, meaningful graphical objects.
-- Error, success, warning, selected states that do not rely only on color.
+- Error, success, warning, selected states not relying only on color.
 - Readability at increased text spacing.
 - Content usable at high zoom.
-- Layouts that do not require two-dimensional scrolling for ordinary content.
+- Layouts not requiring two-dimensional scrolling for ordinary content.
 - Text not unintentionally truncated.
-- Sufficient target size and spacing for controls.
-- Compatibility with forced-colors or high-contrast modes where relevant.
+- Sufficient target size + spacing for controls.
+- Compatibility with forced-colors/high-contrast modes where relevant.
 
-Use project's design tokens when available. No arbitrary colors that conflict with design system.
+Use project's design tokens when available. No arbitrary colors conflicting with design system.
 
 #### 4.8 Responsive and Zoom Behavior
 
@@ -327,7 +327,7 @@ Check for:
 - Overlapping dialogs.
 - Unreachable horizontal content.
 - Broken focus indicators.
-- Menus that cannot be operated on small screens.
+- Menus inoperable on small screens.
 - Sticky elements obscuring focused content.
 
 #### 4.9 Motion and Timing
@@ -336,8 +336,8 @@ Check for:
 
 - Respect for `prefers-reduced-motion`.
 - Avoidance of unnecessary animation.
-- User controls for pausing, stopping, or hiding moving content where applicable.
-- No flashing that could create risk.
+- User controls for pausing, stopping, hiding moving content where applicable.
+- No flashing creating risk.
 - Sufficient time to read or complete timed interactions.
 - Avoidance of auto-advancing content without controls.
 - Reduced-motion behavior for route transitions, modals, carousels, loading states.
@@ -349,13 +349,13 @@ Reduced-motion implementation must preserve meaning + usability, not simply remo
 Check that:
 
 - Loading states communicated appropriately.
-- Async success and error messages announced when necessary.
+- Async success/error messages announced when necessary.
 - Live regions used sparingly.
 - Updates do not interrupt users unnecessarily.
-- Toasts accessible and persist long enough to be consumed.
-- Newly rendered content has logical reading and focus order.
+- Toasts accessible, persist long enough to be consumed.
+- Newly rendered content has logical reading + focus order.
 - Infinite scrolling has alternative (pagination or load-more control).
-- Route changes provide appropriate page title and focus context.
+- Route changes provide appropriate page title + focus context.
 
 No large or frequently changing regions in assertive live regions.
 
@@ -369,7 +369,7 @@ Check that:
 - Sortable columns expose their state.
 - Responsive table behavior remains understandable.
 - Data not communicated only through visual position or color.
-- Virtualized tables preserve appropriate semantics and keyboard access.
+- Virtualized tables preserve appropriate semantics + keyboard access.
 
 #### 4.12 Media
 
@@ -379,8 +379,8 @@ Check that media provides, where relevant:
 - Transcripts.
 - Audio descriptions.
 - Keyboard-accessible controls.
-- Visible and programmatic names for controls.
-- Pause, stop, and volume controls.
+- Visible + programmatic names for controls.
+- Pause, stop, volume controls.
 - Non-visual alternative for essential information.
 
 No assumption browser-native media controls meet every project requirement.
@@ -405,7 +405,7 @@ Pay special attention to shared components:
 - Icons.
 - Layout primitives.
 
-Determine whether accessibility behavior is implemented:
+Determine whether accessibility behavior implemented:
 
 - In shared component.
 - In individual consumers.
@@ -471,7 +471,7 @@ Avoid:
 - Making all content `aria-live`.
 - Removing focus outlines.
 - Solving contrast issues by changing colors without checking all states.
-- Introducing keyboard shortcuts that conflict with assistive technology.
+- Introducing keyboard shortcuts conflicting with assistive technology.
 - Adding inaccessible custom widgets when native control sufficient.
 
 ### 8. Add or Update Tests
@@ -521,7 +521,7 @@ Perform manual checks when applicable:
 - Inspect content with screen reader when available.
 - Test at mobile and desktop viewport sizes.
 - Verify error and loading states.
-- Verify color is not only means of conveying information.
+- Verify color not only means of conveying information.
 
 If screen reader or browser unavailable, state not tested.
 
@@ -565,7 +565,7 @@ Issues significantly impairing use:
 
 ### Medium
 
-Issues reducing usability but have workaround:
+Issues reducing usability but with workaround:
 
 - Poor heading structure.
 - Missing descriptions.
@@ -610,7 +610,7 @@ Map to WCAG only when relationship clear. Examples:
 - Missing form labels: WCAG 1.3.1 and 3.3.2 may be relevant.
 - Missing keyboard operation: WCAG 2.1.1 may be relevant.
 - Keyboard trap: WCAG 2.1.2 may be relevant.
-- Missing visible focus: WCAG 2.4.7 or 2.4.11 may be relevant depending on issue.
+- Missing visible focus: WCAG 2.4.7 or 2.4.11 may be relevant.
 - Missing page title: WCAG 2.4.2 may be relevant.
 - Unclear link purpose: WCAG 2.4.4 may be relevant.
 - Insufficient contrast: WCAG 1.4.3 or 1.4.11 may be relevant.
@@ -638,7 +638,7 @@ Third-party library accessibility claim is not proof that project's usage is acc
 
 ## Generated and Design-System Code
 
-If components or styles are generated:
+If components or styles generated:
 
 1. Identify source of truth.
 2. Update source rather than generated output.

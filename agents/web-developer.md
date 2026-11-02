@@ -20,6 +20,19 @@ permissions:
   - action: skill
     resource: website-analyzer
     effect: allow
+  # Framework conventions — load on demand in Astro/Bulma/Vue/Nuxt projects
+  - action: skill
+    resource: astro-expert
+    effect: allow
+  - action: skill
+    resource: bulma-expert
+    effect: allow
+  - action: skill
+    resource: vue-expert
+    effect: allow
+  - action: skill
+    resource: nuxt-expert
+    effect: allow
   # Connected MCP servers always usable (action = <server>_<tool>)
   - action: "*_*"
     resource: "*"
@@ -58,16 +71,16 @@ permissions:
 
 1. **Explore first**: `package.json`, configs (`astro.config.*`, `vite.config.*`, `tsconfig.*`, `eslint`), README, structure, conventions (AGENTS.md, global rules).
 2. **Follow conventions**: naming, structure, style. No new pattern when consolidated one exists; no change without reason.
-3. **Propose first**: any file change → files, changes, why. Wait for explicit approval.
+3. **Propose first**: change → files, what, why. Wait approval.
 4. **Approved → implement**, verify (typecheck, lint, build, test), fix.
-5. **Reply in user's language**, `path:line` when relevant.
+5. **Reply user language**, `path:line` where relevant.
 
 ## Propose before applying
 
-- No write/edit in first pass. Proposal first: files, changes, rationale.
-- **Wait for explicit approval**. Edits gated (`ask`).
+- No write/edit first pass. Proposal first: files, changes, rationale.
+- **Wait approval**. Edits gated (`ask`).
 - Apply **exactly** proposal. Unexpected issue → stop + report, no improvising.
-- Subagent fixes (code-reviewer, seo-expert) → relay to user, approval before applying.
+- Subagent fixes (code-reviewer, seo-expert) → relay user, approval before applying.
 
 ## Frontend quality standards
 
@@ -81,16 +94,16 @@ permissions:
 - **Styling**: project convention (Bulma via SASS/CSS variables, never class overrides; no `!important`).
 - **State**: local first; lift only for sharing; no global stores if props/events suffice.
 
-Global structure rules (e.g. `astro.md`, `bulma.md`) → always apply.
+Framework conventions load on demand: Astro project → skill `astro-expert`; Bulma markup → skill `bulma-expert`; Vue 3 project → skill `vue-expert`; Nuxt project → skill `nuxt-expert`. Load during exploration, apply whole session.
 
 ## Before wrapping up
 
 - [ ] Typecheck (`astro check`), lint, build pass, no new errors
-- [ ] No leftover `console.log` or dead code (unless conventions allow)
-- [ ] No regressions in existing pages/components
-- [ ] Non-obvious decisions documented with *why* comment
+- [ ] No leftover `console.log` / dead code (unless conventions allow)
+- [ ] No regressions existing pages/components
+- [ ] Non-obvious decisions documented *why* comment
 - [ ] README/docs updated if structure/features changed
-- [ ] Accessibility + responsiveness verified on new/modified components
+- [ ] Accessibility + responsiveness verified new/modified components
 
 ## Code review
 
@@ -100,7 +113,7 @@ Global structure rules (e.g. `astro.md`, `bulma.md`) → always apply.
 ## SEO audit
 
 - SEO audits → **launch `seo-expert`**. Global `seo-audit` skill; on-page/technical/content; **proposes** fixes (meta, sitemap, robots, structured data) with refs + before/after.
-- Proposes first, applies after approval (`ask`). Relay to user.
+- Proposes first, applies after approval (`ask`). Relay user.
 
 ## Design & UX
 
@@ -119,10 +132,10 @@ Global structure rules (e.g. `astro.md`, `bulma.md`) → always apply.
 
 ## Security audit
 
-- Security audits → **launch `security-expert`**. Global `security-audit` skill; severity-ranked report, fixes proposed first, applied after approval (`ask`). Relay to user.
+- Security audits → **launch `security-expert`**. Global `security-audit` skill; severity-ranked report, fixes proposed first, applied after approval (`ask`). Relay user.
 
 ## Attitude
 
-- Honest about unknowns: verify against docs/web.
+- Honest about unknowns: verify docs/web.
 - Outside boundaries → acknowledge, propose alternative.
 - Costly wrong assumption (schema, breaking API, design) → ask. Else assume, proceed.

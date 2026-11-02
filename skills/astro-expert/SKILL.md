@@ -1,8 +1,13 @@
-# astro.md
+---
+name: astro-expert
+description: Astro project structure and component conventions — public/images vs src/assets, layouts, kebab-case pages, typed props, components < 150 lines. Load when the project uses Astro (astro.config.* or *.astro files present).
+---
+
+# Astro
 
 ## Overview
 
-Global rules + conventions Astro projects. Styling-agnostic: pair with rules file of CSS solution in use (e.g. `bulma.md`), no duplication.
+Global rules + conventions Astro projects. Styling-agnostic: pair with skill `bulma-expert` when project uses Bulma, no duplication.
 
 ## Project Structure
 
@@ -23,13 +28,13 @@ project-root/
 
 ### Structure Rules
 
-**`public/images/`** — Only assets not going through bundler: images referenced directly by URL in markup/meta tags (`og:image`, favicon, etc.). Images used inside Astro components go in `src/assets/`.
+**`public/images/`** — Only assets not going through bundler: images referenced directly by URL in markup/meta (`og:image`, favicon, etc.). Images inside Astro components go in `src/assets/`.
 
-**`src/assets/`** — Everything Vite must process: images imported inside components, inline SVGs, local fonts. Astro optimizes images imported here.
+**`src/assets/`** — Everything Vite must process: images imported in components, inline SVGs, local fonts. Astro optimizes images imported here.
 
 **`src/components/`** — Reusable `.astro` components. Page-specific components next to page or dedicated subfolder. As project grows, organize by domain (e.g. `components/nav/`, `components/cards/`).
 
-**`src/data/`** — Static data, content config, mocks: `.json`/`.ts` files export arrays/objects for pages. No logic, just data.
+**`src/data/`** — Static data, content config, mocks: `.json`/`.ts` export arrays/objects for pages. No logic, just data.
 
 **`src/layouts/`** — Layouts wrap pages. At minimum `BaseLayout.astro` with `<head>`, metadata, base HTML. One layout per site section when needed (e.g. `BlogLayout.astro`, `LandingLayout.astro`).
 
@@ -72,7 +77,7 @@ Imports first, then props, then logic. No large logic blocks — complex logic �
 
 ### Slots
 
-`<slot />` for main content, named slots for specific areas (header, footer, etc.). Document non-obvious slots with comment inside component.
+`<slot />` main content; named slots for specific areas (header, footer, etc.). Document non-obvious slots with comment inside component.
 
 ---
 

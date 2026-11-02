@@ -8,10 +8,10 @@ This repository is an **OpenCode global configuration** (default location: `~/.c
 
 ## Features
 
-- 🧭 **Primary agent**, [`web-developer`](agents/web-developer.md): Senior Web Developer for Astro, Vue 3 (+Nuxt), Vite and strict TypeScript, with Bulma/Tailwind styling. Owns the generalist skills (debugging, performance, website analysis).
+- 🧭 **Primary agent**, [`web-developer`](agents/web-developer.md): Senior Web Developer for Astro, Vue 3 (+Nuxt), Vite and strict TypeScript, with Bulma/Tailwind styling. Owns the generalist skills (debugging, performance, website analysis) and loads framework-convention skills (Astro, Bulma, Vue, Nuxt) on demand.
 - 🧩 **Six specialist subagents**, each owning one skill: [code review](agents/code-reviewer.md), [SEO](agents/seo-expert.md), [UI/UX](agents/ux-ui-expert.md), [accessibility](agents/accessibility-expert.md), [documentation](agents/documentation-updater.md), [security](agents/security-expert.md).
 - 🛡️ **Safe by default**, every write/edit is approval-gated (`effect: ask`); the workspace is sandboxed (`external_directory: deny`). Propose first, apply only after explicit approval.
-- 📏 **Enforced conventions**, `clean-code`, `astro` and `bulma` rules are auto-injected into every session via `opencode.jsonc`.
+- 📏 **Enforced conventions**, `clean-code` rules are auto-injected into every session via `opencode.jsonc`; framework conventions (Astro, Bulma, Vue, Nuxt) are loaded on demand as skills.
 - ⌨️ **Slash commands**, scaffold a new frontend project (`pnpm` only) or compress memory files to save tokens.
 - 🌐 **MCP**, ships the `gh_grep` remote server for public GitHub code search.
 
@@ -27,25 +27,27 @@ web-dev-agent/
 │   ├── accessibility-expert.md
 │   ├── documentation-updater.md
 │   └── security-expert.md
-├── skills/                      # 9 skills (each <name>/SKILL.md) + supporting files
+├── skills/                      # 13 skills (each <name>/SKILL.md) + supporting files
+│   ├── astro-expert/
+│   ├── bulma-expert/
 │   ├── code-review/
 │   ├── frontend-accessibility/
+│   ├── nuxt-expert/
 │   ├── performance-optimizer/
 │   ├── security-audit/
 │   │   └── references/checklist.md
 │   ├── seo-audit/
 │   ├── systematic-debugging/
 │   ├── update-documentation/
+│   ├── vue-expert/
 │   ├── web-design/
 │   └── website-analyzer/
 │       └── scripts/fetch_site.py  # stdlib-only scanner, prints JSON analysis
 ├── commands/                    # 2 slash commands
 │   ├── doc-compress.md
 │   └── scaffold-frontend-project.md
-├── rules/                       # 3 instruction sets, auto-injected into sessions
-│   ├── clean-code.md
-│   ├── astro.md
-│   └── bulma.md
+├── rules/                       # 1 instruction set, auto-injected into sessions
+│   └── clean-code.md
 ├── AGENTS.md                    # global agent instructions (loaded into every session)
 ├── opencode.jsonc               # config: default agent, rules injection, gh_grep MCP
 └── LICENSE
@@ -71,13 +73,17 @@ web-dev-agent/
 
 | Skill | Purpose |
 |---|---|
+| `astro-expert` | Astro structure & component conventions (`public/images/` vs `src/assets/`, layouts, kebab-case pages, typed props, components < 150 lines); load on demand in Astro projects |
+| `bulma-expert` | Bulma CSS done right: utility classes over overrides, SASS/CSS variable customization, responsive helpers, columns; load on demand when Bulma is used |
 | `code-review` | Checklist review: readability, best practices, testing, performance, security, documentation |
 | `frontend-accessibility` | Build a11y into components, pages, forms, navigation, media and interaction patterns |
+| `nuxt-expert` | Nuxt 4/3 conventions: SSR/SSG/hybrid via `routeRules`, `app/` structure, `useFetch`/`useAsyncData`, routing, layouts, Nitro, `runtimeConfig`; load on demand in Nuxt projects (also SEO meta, hydration, deployment) |
 | `performance-optimizer` | Analyze then optimize: duplication, bundle size, images, runtime hotspots, dead code |
 | `security-audit` | Output concise, deduplicated, severity-ranked findings (Critical → Info), with rubric |
 | `seo-audit` | Suggest-only SEO fixes: meta tags, headings, structured data, sitemap/robots, content |
 | `systematic-debugging` | Root-cause analysis before touching code: reproduce → isolate → fix → verify → explain |
 | `update-documentation` | Docs as implementation-verified source of truth; focused diffs, no invention |
+| `vue-expert` | Vue 3 / Nuxt conventions: Composition API (`<script setup>`), typed props/emits, composables, Pinia stores, Vite builds (incl. Quasar/Capacitor, PWA); load on demand in Vue projects |
 | `web-design` | UI/UX checklist: design system consistency, responsive behavior, motion, contrast |
 | `website-analyzer` | Analyzes a live site from its URL and writes a compact `docs/ANALYSIS.md` report |
 
@@ -93,8 +99,6 @@ web-dev-agent/
 | Rule | Scope |
 |---|---|
 | `rules/clean-code.md` | Language-agnostic clean-code baseline: naming, small functions, error handling, security, tests, Definition of Done, red flags |
-| `rules/astro.md` | Astro project structure (`public/images/` vs `src/assets/`), component conventions, naming, typed props |
-| `rules/bulma.md` | Use Bulma as intended: customization via SCSS variables only, no class overrides, no `!important`, kebab-case custom classes |
 
 ## Installation
 
@@ -121,8 +125,8 @@ No manual dependency install: `package.json` / `node_modules` are runtime-manage
 - **Skill ↔ agent map**, each specialist subagent owns one domain skill and loads it first; the primary agent owns the generalist skills and delegates the rest. Skills/agents trigger off their `description` frontmatter.
 - **Approval gate**, the primary and all subagents use `effect: ask` on edits: nothing is written without explicit user approval.
 - **Sandbox**, `external_directory: deny` is declared last so it wins over every earlier `allow`, blocking reads/writes/shell access outside the workspace.
-- **Auto-injected instructions**, `opencode.jsonc` sets `default_agent: web-developer` and injects `rules/*.md` (plus `AGENTS.md`) into every session, so conventions apply everywhere.
-- **Generic by design**, instructions reference paths relative to the config root (e.g. `rules/astro.md`), so the setup works on any machine without path rewrites.
+- **Auto-injected instructions**, `opencode.jsonc` sets `default_agent: web-developer` and injects only `rules/clean-code.md` (plus `AGENTS.md`) into every session; framework conventions are no longer auto-injected — they load on demand via skills (`astro-expert`, `bulma-expert`, `vue-expert`, `nuxt-expert`) in projects that use those frameworks.
+- **Generic by design**, instructions reference paths relative to the config root (e.g. `rules/clean-code.md`), so the setup works on any machine without path rewrites.
 
 ## Security notes
 
