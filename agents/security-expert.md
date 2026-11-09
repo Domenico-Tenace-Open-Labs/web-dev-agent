@@ -23,6 +23,38 @@ permissions:
   - action: edit
     resource: "*"
     effect: ask
+  # SHELL GATE — every terminal command asks for confirmation by default, so
+  # file changes through the shell (sed -i, echo >, rm, mv) cannot bypass the
+  # edit approval gate. OpenCode V2 matches shell rules against the full raw
+  # command string, so the read-only exceptions are exact commands, without a
+  # trailing wildcard: "git status*" would also match "git status && rm -rf src".
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git status"
+    effect: allow
+  - action: shell
+    resource: "git diff"
+    effect: allow
+  - action: shell
+    resource: "git log --oneline"
+    effect: allow
+  - action: shell
+    resource: "ls"
+    effect: allow
+  # Destructive or irreversible commands are denied wherever they appear in the
+  # command string (leading wildcard catches chained commands). Defense in
+  # depth only: the "ask" base above is the real protection.
+  - action: shell
+    resource: "*rm -rf*"
+    effect: deny
+  - action: shell
+    resource: "*git push*"
+    effect: deny
+  - action: shell
+    resource: "*git reset --hard*"
+    effect: deny
   # SANDBOX — must go last: for external_directory the last matching rule wins,
   # so this deny overrides every previous allow. Blocks reads/writes/shell
   # outside the workspace (Location + project worktree).

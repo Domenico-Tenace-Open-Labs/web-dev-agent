@@ -10,7 +10,7 @@ This repository is an **OpenCode global configuration** (default location: `~/.c
 
 - 🧭 **Primary agent**, [`web-developer`](agents/web-developer.md): Senior Web Developer for Astro, Vue 3 (+Nuxt), Vite and strict TypeScript, with Bulma/Tailwind styling. Owns the generalist skills (debugging, performance, website analysis) and loads framework-convention skills (Astro, Bulma, Vue, Nuxt) on demand.
 - 🧩 **Six specialist subagents**, each owning one skill: [code review](agents/code-reviewer.md), [SEO](agents/seo-expert.md), [UI/UX](agents/ux-ui-expert.md), [accessibility](agents/accessibility-expert.md), [documentation](agents/documentation-updater.md), [security](agents/security-expert.md).
-- 🛡️ **Safe by default**, every write/edit is approval-gated (`effect: ask`); the workspace is sandboxed (`external_directory: deny`). Propose first, apply only after explicit approval.
+- 🛡️ **Safe by default**, every write/edit and every shell command is approval-gated (`effect: ask`), with a few exact read-only commands allowed and destructive ones denied; the workspace is sandboxed (`external_directory: deny`). Propose first, apply only after explicit approval.
 - 📏 **Enforced conventions**, `clean-code` rules are auto-injected into every session via `opencode.jsonc`; framework conventions (Astro, Bulma, Vue, Nuxt) are loaded on demand as skills.
 - ⌨️ **Slash commands**, scaffold a new frontend project (`pnpm` only) or compress memory files to save tokens.
 - 🌐 **MCP**, ships the `gh_grep` remote server for public GitHub code search.
@@ -124,7 +124,8 @@ No manual dependency install: `package.json` / `node_modules` are runtime-manage
 
 - **Skill ↔ agent map**, each specialist subagent owns one domain skill and loads it first; the primary agent owns the generalist skills and delegates the rest. Skills/agents trigger off their `description` frontmatter.
 - **Approval gate**, the primary and all subagents use `effect: ask` on edits: nothing is written without explicit user approval.
-- **Sandbox**, `external_directory: deny` is declared last so it wins over every earlier `allow`, blocking reads/writes/shell access outside the workspace.
+- **Shell gate**, `shell` defaults to `ask`, so file changes through the terminal (`sed -i`, `rm`, `mv`) cannot bypass the edit approval gate. Only a few exact read-only commands (`git status`, `git diff`, `git log --oneline`, `ls`) run without asking, and `rm -rf`, `git push` and `git reset --hard` are denied anywhere in a command. OpenCode V2 matches shell rules against the full raw command string, so allowed commands are exact, without a trailing wildcard.
+- **Sandbox**, `external_directory: deny` is declared last so it wins over every earlier `allow`, blocking reads/writes outside the workspace. For shell commands OpenCode checks the working directory, not every path written inside a command: the shell gate above is what covers that case.
 - **Auto-injected instructions**, `opencode.jsonc` sets `default_agent: web-developer` and injects only `rules/clean-code.md` (plus `AGENTS.md`) into every session; framework conventions are no longer auto-injected — they load on demand via skills (`astro-expert`, `bulma-expert`, `vue-expert`, `nuxt-expert`) in projects that use those frameworks.
 - **Generic by design**, instructions reference paths relative to the config root (e.g. `rules/clean-code.md`), so the setup works on any machine without path rewrites.
 

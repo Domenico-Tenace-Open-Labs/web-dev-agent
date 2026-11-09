@@ -46,7 +46,7 @@ Out of scope:
 ## Security notes for maintainers and contributors
 
 - `service.json` contains a **plaintext password** for the local OpenCode service. It is gitignored and must never be committed, echoed, or included in prompts/logs.
-- All agents are sandboxed (`external_directory: deny`) and approval-gated (`effect: ask`). Never weaken these permissions without a security review.
+- All agents are sandboxed (`external_directory: deny`) and approval-gated (`effect: ask`) for both edits and shell commands. Never weaken these permissions without a security review: an `allow` on `shell` with a trailing wildcard also matches chained commands.
 - Follow the security baseline in [`rules/clean-code.md`](rules/clean-code.md) for any instruction content you add.
 
 ## No bounty

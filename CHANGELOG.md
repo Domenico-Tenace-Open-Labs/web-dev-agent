@@ -31,4 +31,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+- Shell commands are now approval-gated in every agent (`shell: ask` by default). Previously no `shell` rule existed, so under OpenCode V2's permissive defaults terminal commands ran without confirmation and could modify or delete files, bypassing the `edit: ask` gate. Exact read-only commands stay allowed; `rm -rf`, `git push` and `git reset --hard` are denied.
 - `service.json` (plaintext password of the local OpenCode service) added to `.gitignore` to prevent accidental commits to the repository.
